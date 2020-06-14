@@ -2,8 +2,10 @@
 Lightweight version of OpenPIV-Python for the serverless PIV application and Python-only installations
 
 
-## Installation
+## Installation and test
 
-    pip install openpiv_python_lite
+    pip install git+https://github.com/openpiv/openpiv_python_lite
+    pip install numpy imageio pytest
+    pytest 
     
     
