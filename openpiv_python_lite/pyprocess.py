@@ -24,31 +24,7 @@ import imageio
 
 
 
-def piv():
-    """
-    Simplest PIV run on the pair of images using default settings
 
-    piv(im1,im2) will create a tmp.vec file with the vector filed in pix/dt (dt=1) from 
-    two images, im1,im2 provided as full path filenames (TIF is preferable, whatever imageio can read)
-
-    """
-
-
-    # if im1 is None and im2 is None:
-    im1 = ('../tests/img/frame_a.tif')
-    im2 = ('../tests/img    /frame_b.tif')
-
-    frame_a = imageio.imread(im1)
-    frame_b = imageio.imread(im2)
-    
-    frame_a[0:32, 512-32:] = 255
-
-    u, v = extended_search_area_piv(frame_a,frame_b,
-                                    window_size=32,overlap=16)
-    x, y = get_coordinates(image_size = frame_a.shape, 
-                           window_size=32, overlap=16)
-
-    return x, y, u, v
     
 
 
@@ -624,3 +600,9 @@ def nextpower2(i):
     n = 1
     while n < i: n *= 2
     return n
+
+def random_noise(img):
+    """ Add random noise to image """
+    gauss = np.random.normal(0, 1, img.size)  
+    gauss = gauss.reshape(img.shape[0], img.shape[1]).astype('uint8')
+    return img + gauss
